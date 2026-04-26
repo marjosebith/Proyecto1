@@ -1,16 +1,20 @@
 package org.jala.university.presentation;
 
-import lombok.Getter;
 import org.jala.university.commons.presentation.View;
 
-@Getter
-public enum ExternalPaymentView {
-    MAIN("main-view.fxml");
+public enum ExternalPaymentView implements View {
 
-    private final View view;
+    MAIN("main-view.fxml"),
+    BUSCAR_SERVICIO("buscar-servicio.fxml");
+
+    private final String fileName;
 
     ExternalPaymentView(String fileName) {
-        this.view = new View(fileName);
+        this.fileName = fileName;
     }
 
+    @Override
+    public String getFileName() {
+        return fileName;
+    }
 }

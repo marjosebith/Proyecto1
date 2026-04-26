@@ -36,9 +36,11 @@
 <?import javafx.scene.layout.Pane?>
 
 
+<?import javafx.scene.control.Button?>
 <Pane prefHeight="320.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.MainViewController">
    <children>
       <Label layoutX="102.0" layoutY="152.0" text="External Payment Module View" />
-      <Label layoutX="26.0" layoutY="209.0" text="Add here all the UI components using Scene Builder..." />
+      <Label layoutX="26.0" layoutY="209.0" text="Add here all the UI components using Scene Builder..." /><Button text="Buscar Servicio" onAction="#irABuscarServicio"/>
    </children>
+   <Button text="Buscar Servicio" onAction="#irABuscarServicio"/>
 </Pane>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox spacing="10"
+      prefWidth="800"
+      prefHeight="500"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jala.university.presentation.controller.BuscarServicioController">
+
+    <HBox spacing="10">
+        <TextField fx:id="campoBusqueda" promptText="Buscar..."/>
+        <ComboBox fx:id="filtroCampo"/>
+        <Button text="Buscar" onAction="#onBuscarClick"/>
+    </HBox>
+
+    <TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID"/>
+            <TableColumn fx:id="colNombre" text="Nombre"/>
+            <TableColumn fx:id="colTipo" text="Tipo"/>
+            <TableColumn fx:id="colProveedor" text="Proveedor"/>
+            <TableColumn fx:id="colCategoria" text="Categoría"/>
+        </columns>
+    </TableView>
+
+</VBox>

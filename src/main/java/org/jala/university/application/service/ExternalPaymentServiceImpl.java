@@ -1,23 +1,38 @@
 package org.jala.university.application.service;
 
-import org.jala.university.application.dto.SampleEntityDto;
-import org.jala.university.application.mapper.SampleEntityMapper;
-import org.jala.university.domain.entity.SampleEntity;
-import org.jala.university.domain.repository.SampleEntityRepository;
+import org.jala.university.domain.entity.Servicio;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class ExternalPaymentServiceImpl implements ExternalPaymentService {
-    private final SampleEntityRepository sampleEntityRepository;
-    private final SampleEntityMapper sampleEntityMapper;
 
-    public ExternalPaymentServiceImpl(SampleEntityRepository sampleEntityRepository,
-                                      SampleEntityMapper sampleEntityMapper) {
-        this.sampleEntityRepository = sampleEntityRepository;
-        this.sampleEntityMapper = sampleEntityMapper;
-    }
-    // Here should be added all the functionality to handle the business logic
     @Override
-    public SampleEntityDto doSomething(SampleEntityDto sampleEntityDto) {
-        SampleEntity saved = sampleEntityRepository.save(sampleEntityMapper.mapFrom(sampleEntityDto));
-        return sampleEntityMapper.mapTo(saved);
+    public List<Servicio> buscarServicios(String texto, String campo) {
+
+        List<Servicio> lista = new ArrayList<>();
+
+        lista.add(new Servicio("001", "Netflix", "Streaming", "Netflix Inc", "Entretenimiento"));
+        lista.add(new Servicio("002", "Spotify", "Música", "Spotify Ltd", "Entretenimiento"));
+        lista.add(new Servicio("003", "Luz", "Hogar", "Enel", "Servicios"));
+
+        if (texto == null || texto.isEmpty()) {
+            return lista;
+        }
+
+        String filtro = texto.toLowerCase();
+
+        return lista.stream().filter(s -> {
+            if ("nombre".equalsIgnoreCase(campo)) {
+                return s.getNombre().toLowerCase().contains(filtro);
+            } else if ("tipo".equalsIgnoreCase(campo)) {
+                return s.getTipo().toLowerCase().contains(filtro);
+            } else if ("proveedor".equalsIgnoreCase(campo)) {
+                return s.getProveedor().toLowerCase().contains(filtro);
+            } else if ("categoria".equalsIgnoreCase(campo)) {
+                return s.getCategoria().toLowerCase().contains(filtro);
+            }
+            return true;
+        }).collect(Collectors.toList());
     }
 }
