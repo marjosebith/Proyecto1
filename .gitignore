@@ -1,2 +1,4 @@
 /.idea
 /target
+*.db
+db.sqlite3
