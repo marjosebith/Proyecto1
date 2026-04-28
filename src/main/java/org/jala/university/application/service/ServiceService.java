@@ -9,13 +9,11 @@ import org.jala.university.application.model.Service;
 
 import java.util.List;
 
-public class ServiceService {
+public final class ServiceService {
     private final ServiceDAO serviceDAO;
-    private final ServiceMapper mapper;
 
     public ServiceService() {
         this.serviceDAO = new ServiceDAO();
-        this.mapper = new ServiceMapper();
 
         // Verificar conexión y estructura
         if (!serviceDAO.verificarTablaServices()) {
@@ -30,7 +28,7 @@ public class ServiceService {
     public List<ServiceDTO> obtenerMisServicios() {
         try {
             List<Service> services = serviceDAO.obtenerServiciosActivos();
-            List<ServiceDTO> dtos = mapper.toDTOList(services);
+            List<ServiceDTO> dtos = ServiceMapper.toDTOList(services);
             System.out.printf("Cargados %d servicios activos%n", dtos.size());
             return dtos;
         } catch (Exception e) {
@@ -44,7 +42,7 @@ public class ServiceService {
 
     public ServiceDTO obtenerServicio(Long serviceId) {
         Service service = serviceDAO.obtenerServicioPorId(serviceId);
-        return mapper.toDTO(service);
+        return ServiceMapper.toDTO(service);
     }
 
 

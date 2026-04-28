@@ -2,29 +2,24 @@ package org.jala.university.application.dao;
 
 import org.jala.university.application.model.Service;
 import org.jala.university.db.ConnectionManager;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceDAO {
-
-
-     //Lista servicios activos (ordenados por fecha creación DESC)
+public final class ServiceDAO {
+    //Lista servicios activos (ordenados por fecha creación DESC)
     public List<Service> obtenerServiciosActivos() {
         List<Service> servicios = new ArrayList<>();
-
         String sql = """
-            SELECT service_id, service_name, service_type, provider_name, category, 
-                   created_at, updated_at, is_active
-            FROM services 
-            WHERE is_active = 1 
-            ORDER BY created_at DESC
-            """;
-
+                SELECT service_id, service_name, service_type, provider_name, category,
+                created_at, updated_at, is_active FROM services
+                WHERE is_active = 1
+                ORDER BY created_at DESC
+                """;
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
-
             while (rs.next()) {
                 Service service = mapResultSetToService(rs);
                 servicios.add(service);
@@ -37,14 +32,14 @@ public class ServiceDAO {
     }
 
 
-     // Buscar servicio por ID
+    // Buscar servicio por ID
     public Service obtenerServicioPorId(Long serviceId) {
         String sql = """
-            SELECT service_id, service_name, service_type, provider_name, category, 
-                   created_at, updated_at, is_active
-            FROM services 
-            WHERE service_id = ? AND is_active = 1
-            """;
+                SELECT service_id, service_name, service_type, provider_name, category,
+                created_at, updated_at, is_active
+                FROM services
+                WHERE service_id = ? AND is_active = 1
+                """;
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -90,7 +85,7 @@ public class ServiceDAO {
     }
 
 
-     //Conteo de servicios activos
+    //Conteo de servicios activos
     public int contarServiciosActivos() {
         String sql = "SELECT COUNT(*) FROM services WHERE is_active = 1";
 
