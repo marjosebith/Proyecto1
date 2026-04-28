@@ -7,10 +7,16 @@ import org.jala.university.application.model.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ServiceMapper {
+public final class ServiceMapper {
+
+    private ServiceMapper() {
+        throw new UnsupportedOperationException("Utility class");
+    }
 
     public static ServiceDTO toDTO(Service service) {
-        if (service == null) return null;
+        if (service == null) {
+            return null;
+        }
 
         return new ServiceDTO(
                 service.getServiceId(),
@@ -23,7 +29,9 @@ public class ServiceMapper {
     }
 
     public static Service toEntity(ServiceDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) {
+            return null;
+        }
 
         Service service = new Service();
         service.setServiceName(dto.getServiceName());

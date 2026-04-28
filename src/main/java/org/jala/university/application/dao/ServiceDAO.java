@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceDAO {
+public final class ServiceDAO {
 
 
     //Lista servicios activos (ordenados por fecha creación DESC)
@@ -14,10 +14,10 @@ public class ServiceDAO {
         List<Service> servicios = new ArrayList<>();
 
         String sql = """
-            SELECT service_id, service_name, service_type, provider_name, category, 
-                   created_at, updated_at, is_active
-            FROM services 
-            WHERE is_active = 1 
+            SELECT service_id, service_name, service_type, provider_name, category,
+            created_at, updated_at, is_active
+            FROM services
+            WHERE is_active = 1
             ORDER BY created_at DESC
             """;
 
@@ -40,9 +40,9 @@ public class ServiceDAO {
     // Buscar servicio por ID
     public Service obtenerServicioPorId(Long serviceId) {
         String sql = """
-            SELECT service_id, service_name, service_type, provider_name, category, 
+            SELECT service_id, service_name, service_type, provider_name, category,
                    created_at, updated_at, is_active
-            FROM services 
+            FROM services
             WHERE service_id = ? AND is_active = 1
             """;
 
@@ -108,7 +108,8 @@ public class ServiceDAO {
     }
 
     public boolean eliminarServicio(Long serviceId) {
-        String sql = "UPDATE services SET is_active = 0, updated_at = CURRENT_TIMESTAMP WHERE service_id = ? AND is_active = 1";
+        String sql = "UPDATE services SET is_active = 0, updated_at = CURRENT_TIMESTAMP "
+                + "WHERE service_id = ? AND is_active = 1";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
