@@ -41,7 +41,6 @@ public final class BuscarServicioController extends BaseController {
 
     @FXML
     public void initialize() {
-        System.out.println("Pantalla cargada correctamente");
 
         service = new ExternalPaymentServiceImpl();
 
@@ -54,7 +53,17 @@ public final class BuscarServicioController extends BaseController {
         colProveedor.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getProveedor()));
         colCategoria.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCategoria()));
 
-        cargarDatos("", "Todos");
+        //trae todos los servicios iniciales
+        //cargarDatos("", "Todos");
+        tabla.getItems().clear();
+
+        //busqueda automatica
+//        campoBusqueda.textProperty().addListener((obs, oldVal, newVal) -> {
+//            onBuscarClick();
+//        });
+
+        //busqueda por enter o click
+        campoBusqueda.setOnAction(e -> onBuscarClick());
     }
 
     @FXML
@@ -63,6 +72,11 @@ public final class BuscarServicioController extends BaseController {
         String texto = campoBusqueda.getText();
         String campo = filtroCampo.getValue();
 
+        if (texto == null || texto.isBlank()) {
+            cargarDatos("", "Todos");
+            return;
+        }
+
         cargarDatos(texto, campo);
     }
 
@@ -70,5 +84,11 @@ public final class BuscarServicioController extends BaseController {
 
         List<Servicio> lista = service.buscarServicios(texto, campo);
         tabla.setItems(FXCollections.observableArrayList(lista));
+
+        if (lista.isEmpty()) {
+            tabla.setPlaceholder(new Label("No se encuentran registros con su búsqueda"));
+        } else {
+            tabla.setPlaceholder(new Label("")); // limpiar mensaje
+        }
     }
 }

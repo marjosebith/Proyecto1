@@ -2,19 +2,18 @@ package org.jala.university.presentation;
 
 import org.jala.university.commons.presentation.View;
 
-public enum ExternalPaymentView implements View {
+public enum ExternalPaymentView {
 
     MAIN("main-view.fxml"),
     BUSCAR_SERVICIO("buscar-servicio.fxml");
 
-    private final String fileName;
+    private final View view;
 
     ExternalPaymentView(String fileName) {
-        this.fileName = fileName;
+        this.view = new View(fileName);
     }
 
-    @Override
-    public String getFileName() {
-        return fileName;
+    public View getView() {
+        return view;
     }
 }

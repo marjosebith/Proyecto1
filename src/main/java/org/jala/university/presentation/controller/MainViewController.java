@@ -10,7 +10,7 @@ public final class MainViewController extends BaseController {
     @FXML
     public void irABuscarServicio() {
         ViewSwitcher.switchTo(
-                ExternalPaymentView.BUSCAR_SERVICIO
+                ExternalPaymentView.BUSCAR_SERVICIO.getView()
         );
     }
 }

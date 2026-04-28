@@ -11,7 +11,7 @@ public final class MainView extends Application {
     public void start(Stage primaryStage) {
         Scene scene = new Scene(new Pane());
         ViewSwitcher.setup(primaryStage, scene);
-        ViewSwitcher.switchTo(ExternalPaymentView.MAIN);
+        ViewSwitcher.switchTo(ExternalPaymentView.MAIN.getView());
         primaryStage.setScene(scene);
         primaryStage.setTitle("External Payment Module Application");
         primaryStage.show();
