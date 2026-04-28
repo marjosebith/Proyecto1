@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      prefHeight="600" prefWidth="1000" spacing="8" stylesheets="@/styles/editar-servicio.css"
+      fx:controller="org.jala.university.presentation.controller.EditarServicioController">
+
+    <Label text="Tus servicios registrados"/>
+
+    <!-- Los ToggleButtons se inyectan aquí dinámicamente -->
+    <VBox fx:id="servicesContainer" spacing="4"/>
+
+    <Label text="Alias"/>
+    <TextField fx:id="aliasField"/>
+
+    <Label text="Número de cuenta"/>
+    <TextField fx:id="accountField"/>
+
+    <Label text="Notas"/>
+    <TextField fx:id="notesField"/>
+
+    <CheckBox fx:id="activeCheck" text="Activo"/>
+
+    <HBox spacing="8">
+        <Button text="Guardar" onAction="#handleUpdate"/>
+        <Button text="Volver"  onAction="#goBack"/>
+    </HBox>
+</VBox>
