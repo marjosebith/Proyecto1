@@ -19,8 +19,3 @@ INSERT INTO user_services (user_id, service_id, account_number, alias, notes) VA
                                                                                   (1, 1, '1234567890', 'Luz Casa', 'Pago mensual de luz'),
                                                                                   (1, 2, '0987654321', 'Agua Casa', 'Pago mensual de agua'),
                                                                                   (1, 3, '5555555555', 'Internet Casa', 'Pago mensual de internet');
-
-INSERT INTO user_services (user_id, service_id, account_number, alias) VALUES
-                                                                        (1, 1, '12345', 'Luz Casa'),
-                                                                        (1, 2, '67890', 'Agua Casa'),
-                                                                        (1, 3, '11111', 'Internet Hogar');

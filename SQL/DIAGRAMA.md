@@ -309,21 +309,21 @@ Registro de intentos fallidos de ejecución de pagos recurrentes para auditoría
 ### Flujo de Relaciones Clave:
 
 1. **Users → User_Services ← Services**
-   - Relación N:M entre usuarios y servicios
-   - Permite que un usuario tenga múltiples servicios
-   
+    - Relación N:M entre usuarios y servicios
+    - Permite que un usuario tenga múltiples servicios
+
 2. **Users → Payments ← Services**
-   - Registra cada transacción
-   - Vincula usuario, servicio y método de pago
-   
+    - Registra cada transacción
+    - Vincula usuario, servicio y método de pago
+
 3. **Payments → Invoices** (1:1)
-   - Cada pago completo genera una factura
-   
+    - Cada pago completo genera una factura
+
 4. **Recurring_Payments → Payments**
-   - Los pagos automáticos se registran como pagos normales
-   
+    - Los pagos automáticos se registran como pagos normales
+
 5. **Recurring_Payments → Payment_Attempts**
-   - Registra cada intento (exitoso o fallido) de ejecución
+    - Registra cada intento (exitoso o fallido) de ejecución
 
 ---
 
@@ -358,19 +358,19 @@ Todos los índices están optimizados para mejorar el rendimiento de las consult
 ### Integridad Referencial
 
 1. **Claves Foráneas (Foreign Keys):**
-   - Todas las referencias de usuarios son **ON DELETE CASCADE** (eliminación en cascada)
-   - Referencias a servicios y métodos de pago son **ON DELETE RESTRICT** (previene eliminación si hay datos relacionados)
-   - Excepto `recurring_payment_id` en payments que es **ON DELETE SET NULL**
+    - Todas las referencias de usuarios son **ON DELETE CASCADE** (eliminación en cascada)
+    - Referencias a servicios y métodos de pago son **ON DELETE RESTRICT** (previene eliminación si hay datos relacionados)
+    - Excepto `recurring_payment_id` en payments que es **ON DELETE SET NULL**
 
 2. **Unicidad (UNIQUE):**
-   - `username` - Cada usuario tiene nombre único
-   - `email` - Cada usuario tiene correo único
-   - `method_code` - Cada método de pago tiene código único
-   - `reference_number` - Cada pago tiene referencia única
-   - `transaction_id` - ID de transacción es único (cuando disponible)
-   - `invoice_number` - Cada factura tiene número único
-   - `payment_id` en invoices - Una factura por pago
-   - Combinación (user_id, service_id, account_number) - Evita servicios duplicados
+    - `username` - Cada usuario tiene nombre único
+    - `email` - Cada usuario tiene correo único
+    - `method_code` - Cada método de pago tiene código único
+    - `reference_number` - Cada pago tiene referencia única
+    - `transaction_id` - ID de transacción es único (cuando disponible)
+    - `invoice_number` - Cada factura tiene número único
+    - `payment_id` en invoices - Una factura por pago
+    - Combinación (user_id, service_id, account_number) - Evita servicios duplicados
 
 ### PRAGMA de Base de Datos
 
@@ -447,9 +447,9 @@ LIMIT 100;
 
 ## Historial de Cambios
 
-| Versión | Fecha | Cambios |
-|---------|-------|---------|
-| 1.0 | 2026-04-24 | Creación inicial del esquema |
+| Versión | Fecha      | Cambios |
+|---------|------------|---------|
+| 1.0 | 2026-04-28 | Creación inicial del esquema |
 
 ---
 
