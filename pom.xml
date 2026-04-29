@@ -19,6 +19,7 @@
     <lombok.version>1.18.28</lombok.version>
     <javafx.version>22</javafx.version>
     <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+    <sqlite.jdbc.version>3.46.0.0</sqlite.jdbc.version>
   </properties>
 
   <dependencies>
@@ -77,6 +78,13 @@
       <artifactId>mockito-core</artifactId>
       <version>5.5.0</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- Database Dependency -->
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>${sqlite.jdbc.version}</version>
     </dependency>
   </dependencies>
 
