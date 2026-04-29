@@ -29,6 +29,11 @@
       <artifactId>commons-module</artifactId>
       <version>${commons.module.version}</version>
     </dependency>
+      <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.4.14</version>
+      </dependency>
     <!--    Third-party libs-->
     <dependency>
       <groupId>org.springframework.boot</groupId>

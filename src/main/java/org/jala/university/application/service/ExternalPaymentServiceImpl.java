@@ -1,9 +1,13 @@
 package org.jala.university.application.service;
 
 import org.jala.university.domain.entity.Servicio;
+import org.jala.university.infrastructure.config.ConnectionManager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public final class ExternalPaymentServiceImpl implements ExternalPaymentService {
 
@@ -12,48 +16,77 @@ public final class ExternalPaymentServiceImpl implements ExternalPaymentService 
 
         List<Servicio> lista = new ArrayList<>();
 
-        lista.add(new Servicio("001", "Netflix", "Streaming", "Netflix Inc", "Entretenimiento"));
-        lista.add(new Servicio("002", "Spotify", "Música", "Spotify Ltd", "Entretenimiento"));
-        lista.add(new Servicio("003", "Luz", "Hogar", "Enel", "Servicios"));
-        lista.add(new Servicio("004", "Agua", "Hogar", "Aguas Andinas", "Servicios"));
-        lista.add(new Servicio("005", "Disney+", "Streaming", "Disney", "Entretenimiento"));
-        lista.add(new Servicio("006", "HBO Max", "Streaming", "Warner", "Entretenimiento"));
-        lista.add(new Servicio("007", "Gas", "Hogar", "Gas Natural", "Servicios"));
-        lista.add(new Servicio("008", "YouTube Premium", "Música", "Google", "Entretenimiento"));
-        lista.add(new Servicio("009", "Internet", "Telecom", "Movistar", "Servicios"));
-        lista.add(new Servicio("010", "Claro TV", "Telecom", "Claro", "Entretenimiento"));
-        lista.add(new Servicio("011", "Agua Hogar", "Hogar", "Aguas Andinas", "Servicios"));
-        lista.add(new Servicio("012", "Agua Industrial", "Hogar", "Aguas Andinas", "Servicios"));
-        lista.add(new Servicio("013", "Movistar Internet", "Telecom", "Movistar", "Servicios"));
-        lista.add(new Servicio("014", "Movistar TV", "Telecom", "Movistar", "Entretenimiento"));
+        String sql;
 
-        if (texto == null || texto.isEmpty()) {
-            return lista;
-        }
+        boolean buscarTodos = texto == null || texto.isBlank();
 
-        String filtro = texto.toLowerCase();
-
-        return lista.stream().filter(s -> {
-
-            if ("Todos".equalsIgnoreCase(campo)) {
-                return s.getNombre().toLowerCase().contains(filtro)
-                        || s.getTipo().toLowerCase().contains(filtro)
-                        || s.getProveedor().toLowerCase().contains(filtro)
-                        || s.getCategoria().toLowerCase().contains(filtro);
-            }
+        if (buscarTodos) {
+            sql = "SELECT service_id, service_name, service_type, provider_name, category FROM services";
+        } else {
 
             switch (campo.toLowerCase()) {
+
                 case "nombre":
-                    return s.getNombre().toLowerCase().contains(filtro);
+                    sql = "SELECT * FROM services WHERE LOWER(service_name) LIKE LOWER(?)";
+                    break;
+
                 case "tipo":
-                    return s.getTipo().toLowerCase().contains(filtro);
+                    sql = "SELECT * FROM services WHERE LOWER(service_type) LIKE LOWER(?)";
+                    break;
+
                 case "proveedor":
-                    return s.getProveedor().toLowerCase().contains(filtro);
+                    sql = "SELECT * FROM services WHERE LOWER(provider_name) LIKE LOWER(?)";
+                    break;
+
                 case "categoria":
-                    return s.getCategoria().toLowerCase().contains(filtro);
-                default:
-                    return true;
+                    sql = "SELECT * FROM services WHERE LOWER(category) LIKE LOWER(?)";
+                    break;
+
+                default: // TODOS
+                    sql = "SELECT * FROM services WHERE "
+                            + "LOWER(service_name) LIKE LOWER(?) OR "
+                            + "LOWER(service_type) LIKE LOWER(?) OR "
+                            + "LOWER(provider_name) LIKE LOWER(?) OR "
+                            + "LOWER(category) LIKE LOWER(?)";
             }
-        }).collect(Collectors.toList());
+        }
+        final int paramNombre = 1;
+        final int paramTipo = 2;
+        final int paramProveedor = 3;
+        final int paramCategoria = 4;
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            if (!buscarTodos) {
+                String valor = "%" + texto + "%";
+
+                if (campo.equalsIgnoreCase("Todos")) {
+                    ps.setString(paramNombre, valor);
+                    ps.setString(paramTipo, valor);
+                    ps.setString(paramProveedor, valor);
+                    ps.setString(paramCategoria, valor);
+                } else {
+                    ps.setString(paramNombre, valor);
+                }
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(new Servicio(
+                        rs.getString("service_id"),
+                        rs.getString("service_name"),
+                        rs.getString("service_type"),
+                        rs.getString("provider_name"),
+                        rs.getString("category")
+                ));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
     }
 }

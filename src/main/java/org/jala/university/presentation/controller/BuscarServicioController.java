@@ -72,8 +72,17 @@ public final class BuscarServicioController extends BaseController {
         String texto = campoBusqueda.getText();
         String campo = filtroCampo.getValue();
 
+        // Si está vacío, mostrara todos los servicios
         if (texto == null || texto.isBlank()) {
             cargarDatos("", "Todos");
+            return;
+        }
+
+        final int minimoCaracteres = 3;
+        // mínimo 3 caracteres para la busqueda
+        if (texto.length() < minimoCaracteres) {
+            tabla.getItems().clear();
+            tabla.setPlaceholder(new Label("Ingrese al menos 3 caracteres"));
             return;
         }
 
