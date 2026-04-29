@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.jala.university.presentation.controller.ServicesController"
+      spacing="10"
+      alignment="CENTER"
+      prefWidth="600" prefHeight="400">
+
+    <Label text="Servicios"/>
+
+    <TableView fx:id="servicesTable" prefHeight="250" prefWidth="500">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="nameColumn" text="Nombre" prefWidth="250"/>
+            <TableColumn fx:id="typeColumn" text="Tipo" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="deleteButton" text="Eliminar"/>
+        <Button fx:id="refreshButton" text="Recargar"/>
+    </HBox>
+
+    <Label fx:id="statusLabel"/>
+</VBox>

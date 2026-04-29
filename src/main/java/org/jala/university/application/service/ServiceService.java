@@ -56,16 +56,14 @@ public final class ServiceService {
             return false;
         }
 
-        // Verificar existencia
-        if (!serviceDAO.existeServicioActivo(serviceId)) {
-            System.out.println("Servicio ID=" + serviceId + " no encontrado o ya eliminado");
-            return false;
+        boolean eliminado = serviceDAO.eliminarServicio(serviceId);
+
+        if (eliminado) {
+            System.out.println("Servicio eliminado PERMANENTEMENTE");
+        } else {
+            System.out.println("No se encontró el servicio");
         }
 
-        boolean eliminado = serviceDAO.eliminarServicio(serviceId);
-        if (eliminado) {
-            System.out.println("Servicio ID=" + serviceId + " eliminado correctamente");
-        }
         return eliminado;
     }
 }

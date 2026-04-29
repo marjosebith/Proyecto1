@@ -108,40 +108,37 @@ public final class ServiceDAO {
     }
 
     public boolean eliminarServicio(Long serviceId) {
-        String sql = "UPDATE services SET is_active = 0, updated_at = CURRENT_TIMESTAMP "
-                + "WHERE service_id = ? AND is_active = 1";
+        String sql = "DELETE FROM services WHERE service_id = ?";
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setLong(1, serviceId);
-            int rowsAffected = pstmt.executeUpdate();
+            int filas = pstmt.executeUpdate();
 
-            return rowsAffected > 0; // true si eliminó
+            return filas > 0;
+
         } catch (SQLException e) {
-            System.err.println("Error eliminando servicio ID=" + serviceId + ": " + e.getMessage());
+            System.err.println("Error eliminando servicio: " + e.getMessage());
+            return false;
+        }
+    }
+    public boolean existeServicio(Long id) {
+        String sql = "SELECT 1 FROM services WHERE service_id = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e) {
             return false;
         }
     }
 
 
-     //Verificar si servicio existe y está activo
-
-    public boolean existeServicioActivo(Long serviceId) {
-        String sql = "SELECT COUNT(*) FROM services WHERE service_id = ? AND is_active = 1";
-
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setLong(1, serviceId);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            System.err.println("Error verificando servicio: " + e.getMessage());
-        }
-        return false;
-    }
 }
 
