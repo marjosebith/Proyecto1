@@ -5,7 +5,8 @@ import org.jala.university.commons.presentation.View;
 public enum ExternalPaymentView {
 
     MAIN("main-view.fxml"),
-    BUSCAR_SERVICIO("buscar-servicio.fxml");
+    BUSCAR_SERVICIO("buscar-servicio.fxml"),
+    PAGO("pago-view.fxml");
 
     private final View view;
 

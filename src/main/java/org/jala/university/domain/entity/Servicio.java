@@ -7,14 +7,16 @@ public final class Servicio {
     private String tipo;
     private String proveedor;
     private String categoria;
+    private String description;
 
     public Servicio(String id, String nombre, String tipo,
-                    String proveedor, String categoria) {
+                    String proveedor, String categoria, String description) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.proveedor = proveedor;
         this.categoria = categoria;
+        this.description = description;
     }
 
     public String getId() {
@@ -35,5 +37,14 @@ public final class Servicio {
 
     public String getCategoria() {
         return categoria;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " - " + description;
     }
 }

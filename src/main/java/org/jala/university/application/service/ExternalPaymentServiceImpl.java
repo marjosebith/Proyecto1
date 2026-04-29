@@ -6,6 +6,7 @@ import org.jala.university.infrastructure.config.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public final class ExternalPaymentServiceImpl implements ExternalPaymentService 
         boolean buscarTodos = texto == null || texto.isBlank();
 
         if (buscarTodos) {
-            sql = "SELECT service_id, service_name, service_type, provider_name, category FROM services";
+            sql = "SELECT * FROM services";
         } else {
 
             switch (campo.toLowerCase()) {
@@ -79,11 +80,40 @@ public final class ExternalPaymentServiceImpl implements ExternalPaymentService 
                         rs.getString("service_name"),
                         rs.getString("service_type"),
                         rs.getString("provider_name"),
-                        rs.getString("category")
+                        rs.getString("category"),
+                        rs.getString("description")
                 ));
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    @Override
+    public List<Servicio> listarServicios() {
+
+        String sql = "SELECT * FROM services";
+        List<Servicio> lista = new ArrayList<>();
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(new Servicio(
+                        rs.getString("service_id"),
+                        rs.getString("service_name"),
+                        rs.getString("service_type"),
+                        rs.getString("provider_name"),
+                        rs.getString("category"),
+                        rs.getString("description")
+                ));
+            }
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

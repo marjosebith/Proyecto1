@@ -7,7 +7,9 @@ import javafx.beans.property.SimpleStringProperty;
 import org.jala.university.application.service.ExternalPaymentService;
 import org.jala.university.application.service.ExternalPaymentServiceImpl;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.commons.presentation.ViewSwitcher;
 import org.jala.university.domain.entity.Servicio;
+import org.jala.university.presentation.ExternalPaymentView;
 
 import java.util.List;
 
@@ -99,5 +101,12 @@ public final class BuscarServicioController extends BaseController {
         } else {
             tabla.setPlaceholder(new Label("")); // limpiar mensaje
         }
+    }
+
+    @FXML
+    private void onVolverClick() {
+        ViewSwitcher.switchTo(
+                ExternalPaymentView.MAIN.getView()
+        );
     }
 }
