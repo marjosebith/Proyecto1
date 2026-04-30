@@ -13,5 +13,4 @@ public class MainApp extends Application {
     public final void start(Stage stage) {
         stage.show();
     }
-
 }

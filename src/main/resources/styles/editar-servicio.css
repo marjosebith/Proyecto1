@@ -1,0 +1,11 @@
+.root {
+    -fx-background-color: #1e1e2f;
+}
+
+.edit {
+    -fx-text-fill: black;
+}
+
+.checklist {
+    -fx-text-fill: write;
+}
