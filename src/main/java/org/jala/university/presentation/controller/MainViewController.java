@@ -11,4 +11,10 @@ public class MainViewController extends BaseController {
     private void goToEdit() {
         ViewSwitcher.switchTo(ExternalPaymentView.EDIT.getView());
     }
+    @FXML
+    private void irABuscarServicio() {
+        ViewSwitcher.switchTo(
+                ExternalPaymentView.BUSCAR_SERVICIO.getView()
+        );
+    }
 }

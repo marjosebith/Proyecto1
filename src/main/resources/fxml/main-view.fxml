@@ -108,9 +108,9 @@
                <Label text="Edit Service" styleClass="nav-label-text"/>
             </HBox>
 
-            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12">
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12" onMouseClicked="#irABuscarServicio">
                <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
-               <Label text="History" styleClass="nav-label-text"/>
+               <Label text="Buscar Servicio" styleClass="nav-label-text" />
             </HBox>
          </VBox>
 
