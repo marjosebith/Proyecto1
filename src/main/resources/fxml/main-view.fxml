@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane
+        prefHeight="600"
+        prefWidth="1000"
+        xmlns="http://javafx.com/javafx/21"
+        xmlns:fx="http://javafx.com/fxml/1"
+        stylesheets="@/styles/main-view.css"
+        fx:controller="org.jala.university.presentation.controller.MainViewController">
+
+   <!-- SIDEBAR -->
+   <left>
+      <VBox styleClass="sidebar" prefWidth="220">
+
+         <!-- Logo -->
+         <HBox alignment="CENTER_LEFT" spacing="10">
+            <VBox.margin><Insets top="28" left="24" bottom="28" right="24"/></VBox.margin>
+            <StackPane styleClass="logo-mark">
+               <Label text="V" styleClass="logo-mark-text"/>
+            </StackPane>
+            <Label text="Vaultis" styleClass="logo-text"/>
+         </HBox>
+
+         <!-- Seccion Main -->
+         <Label text="MAIN" styleClass="nav-section-label">
+            <VBox.margin><Insets left="24" bottom="6"/></VBox.margin>
+         </Label>
+
+         <VBox spacing="2">
+            <VBox.margin><Insets left="12" right="12" bottom="8"/></VBox.margin>
+
+            <HBox styleClass="nav-item-active" alignment="CENTER_LEFT" spacing="12">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="Dashboard" styleClass="nav-label-active"/>
+            </HBox>
+
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="Accounts" styleClass="nav-label-text"/>
+            </HBox>
+
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="Transfers" styleClass="nav-label-text"/>
+            </HBox>
+         </VBox>
+
+         <!-- Seccion Services -->
+         <Label text="SERVICES" styleClass="nav-section-label">
+            <VBox.margin><Insets left="24" top="16" bottom="6"/></VBox.margin>
+         </Label>
+
+         <VBox spacing="2">
+            <VBox.margin><Insets left="12" right="12" bottom="8"/></VBox.margin>
+
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="Payments" styleClass="nav-label-text"/>
+            </HBox>
+
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12" onMouseClicked="#goToEdit">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="Edit Service" styleClass="nav-label-text"/>
+            </HBox>
+
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="History" styleClass="nav-label-text"/>
+            </HBox>
+         </VBox>
+
+         <Region VBox.vgrow="ALWAYS"/>
+
+         <!-- Usuario -->
+         <HBox alignment="CENTER_LEFT" spacing="10">
+            <VBox.margin><Insets left="16" right="16" bottom="24"/></VBox.margin>
+            <StackPane styleClass="user-avatar">
+               <Label text="CR" styleClass="user-avatar-text"/>
+            </StackPane>
+            <VBox spacing="2">
+               <Label text="Carlos Restrepo" styleClass="user-name"/>
+               <Label text="Premium account" styleClass="user-role"/>
+            </VBox>
+         </HBox>
+
+      </VBox>
+   </left>
+
+   <!-- CONTENIDO -->
+   <center>
+      <VBox styleClass="main-area">
+
+         <!-- Topbar -->
+         <HBox styleClass="topbar" alignment="CENTER_LEFT">
+            <Label text="Dashboard" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+            <HBox alignment="CENTER" spacing="12">
+               <StackPane styleClass="topbar-avatar">
+                  <Label text="CR" styleClass="topbar-avatar-text"/>
+               </StackPane>
+            </HBox>
+         </HBox>
+
+         <!-- Scroll principal -->
+         <ScrollPane styleClass="content-scroll" VBox.vgrow="ALWAYS" fitToWidth="true" pannable="false">
+            <VBox spacing="20">
+               <VBox.margin><Insets top="24" left="28" right="28" bottom="24"/></VBox.margin>
+
+               <!-- Stat cards -->
+               <HBox spacing="14">
+
+                  <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" spacing="8">
+                     <Label text="TOTAL BALANCE" styleClass="stat-label"/>
+                     <Label text="\$24,830" styleClass="stat-value"/>
+                     <Label text="+2.4% this month" styleClass="stat-up"/>
+                  </VBox>
+
+                  <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" spacing="8">
+                     <Label text="INCOME" styleClass="stat-label"/>
+                     <Label text="\$5,200" styleClass="stat-value"/>
+                     <Label text="+8.1% vs last month" styleClass="stat-up"/>
+                  </VBox>
+
+                  <VBox styleClass="stat-card" HBox.hgrow="ALWAYS" spacing="8">
+                     <Label text="EXPENSES" styleClass="stat-label"/>
+                     <Label text="\$1,840" styleClass="stat-value"/>
+                     <Label text="+12% vs last month" styleClass="stat-down"/>
+                  </VBox>
+
+               </HBox>
+
+               <!-- Fila inferior -->
+               <HBox spacing="14" alignment="TOP_LEFT">
+
+                  <!-- Transacciones -->
+                  <VBox styleClass="panel" HBox.hgrow="ALWAYS" spacing="0">
+
+                     <HBox alignment="CENTER_LEFT">
+                        <VBox.margin><Insets bottom="12"/></VBox.margin>
+                        <Label text="Recent Transactions" styleClass="panel-title" HBox.hgrow="ALWAYS"/>
+                        <Button text="See all" styleClass="link-btn" onAction="#goToEdit"/>
+                     </HBox>
+
+                     <!-- TX 1 -->
+                     <HBox styleClass="tx-row" alignment="CENTER_LEFT" spacing="12">
+                        <StackPane styleClass="tx-dot tx-dot-blue">
+                           <Label text="N" styleClass="tx-letter"/>
+                        </StackPane>
+                        <VBox HBox.hgrow="ALWAYS" spacing="2">
+                           <Label text="Netflix" styleClass="tx-name"/>
+                           <Label text="Apr 25, 2026" styleClass="tx-date"/>
+                        </VBox>
+                        <Label text="-$15.99" styleClass="tx-minus"/>
+                     </HBox>
+
+                     <Separator styleClass="tx-sep"/>
+
+                     <!-- TX 2 -->
+                     <HBox styleClass="tx-row" alignment="CENTER_LEFT" spacing="12">
+                        <StackPane styleClass="tx-dot tx-dot-green">
+                           <Label text="S" styleClass="tx-letter"/>
+                        </StackPane>
+                        <VBox HBox.hgrow="ALWAYS" spacing="2">
+                           <Label text="Salary deposit" styleClass="tx-name"/>
+                           <Label text="Apr 24, 2026" styleClass="tx-date"/>
+                        </VBox>
+                        <Label text="+$4,200" styleClass="tx-plus"/>
+                     </HBox>
+
+                     <Separator styleClass="tx-sep"/>
+
+                     <!-- TX 3 -->
+                     <HBox styleClass="tx-row" alignment="CENTER_LEFT" spacing="12">
+                        <StackPane styleClass="tx-dot tx-dot-purple">
+                           <Label text="A" styleClass="tx-letter"/>
+                        </StackPane>
+                        <VBox HBox.hgrow="ALWAYS" spacing="2">
+                           <Label text="Adobe Creative Cloud" styleClass="tx-name"/>
+                           <Label text="Apr 23, 2026" styleClass="tx-date"/>
+                        </VBox>
+                        <Label text="-$54.99" styleClass="tx-minus"/>
+                     </HBox>
+
+                     <Separator styleClass="tx-sep"/>
+
+                     <!-- TX 4 -->
+                     <HBox styleClass="tx-row" alignment="CENTER_LEFT" spacing="12">
+                        <StackPane styleClass="tx-dot tx-dot-amber">
+                           <Label text="T" styleClass="tx-letter"/>
+                        </StackPane>
+                        <VBox HBox.hgrow="ALWAYS" spacing="2">
+                           <Label text="Transfer received" styleClass="tx-name"/>
+                           <Label text="Apr 22, 2026" styleClass="tx-date"/>
+                        </VBox>
+                        <Label text="+$800" styleClass="tx-plus"/>
+                     </HBox>
+
+                  </VBox>
+
+                  <!-- Columna derecha -->
+                  <VBox spacing="14" prefWidth="260">
+
+                     <!-- Tarjeta bancaria -->
+                     <VBox styleClass="bank-card" spacing="10">
+                        <Label text="VAULTIS MASTERCARD" styleClass="card-network"/>
+                        <StackPane styleClass="card-chip" maxWidth="30" maxHeight="22" minWidth="30" minHeight="22"/>
+                        <Label text="**** **** **** 4821" styleClass="card-number"/>
+                        <HBox alignment="CENTER_LEFT">
+                           <VBox HBox.hgrow="ALWAYS" spacing="2">
+                              <Label text="Carlos Restrepo" styleClass="card-holder"/>
+                              <Label text="Expires 09/28" styleClass="card-expiry"/>
+                           </VBox>
+                        </HBox>
+                     </VBox>
+
+                     <!-- Acciones rapidas -->
+                     <VBox styleClass="panel" spacing="12">
+                        <Label text="Quick Actions" styleClass="panel-title"/>
+                        <GridPane hgap="8" vgap="8">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                              <ColumnConstraints hgrow="ALWAYS" percentWidth="50"/>
+                           </columnConstraints>
+                           <Button text="Send money" styleClass="quick-btn"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                   maxWidth="Infinity"/>
+                           <Button text="Transfer" styleClass="quick-btn"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                   maxWidth="Infinity"/>
+                           <Button text="Pay bill" styleClass="quick-btn-accent"
+                                   GridPane.columnIndex="0" GridPane.rowIndex="1"
+                                   maxWidth="Infinity" onAction="#goToEdit"/>
+                           <Button text="History" styleClass="quick-btn"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   maxWidth="Infinity"/>
+                        </GridPane>
+                     </VBox>
+
+                  </VBox>
+               </HBox>
+            </VBox>
+         </ScrollPane>
+
+      </VBox>
+   </center>
+
+</BorderPane>
