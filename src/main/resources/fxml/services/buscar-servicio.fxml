@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox spacing="15"
+      prefWidth="800"
+      prefHeight="500"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jala.university.presentation.controller.BuscarServicioController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox spacing="10">
+        <TextField fx:id="campoBusqueda"
+                   promptText="Buscar..."
+                   prefWidth="300"
+                   prefHeight="35"/>
+
+        <ComboBox fx:id="filtroCampo"
+                  prefWidth="150"
+                  prefHeight="35"/>
+
+        <Button text="Buscar"
+                prefWidth="100"
+                prefHeight="35"
+                onAction="#onBuscarClick"/>
+    </HBox>
+
+    <TableView fx:id="tabla" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="180"/>
+            <TableColumn fx:id="colTipo" text="Tipo" prefWidth="150"/>
+            <TableColumn fx:id="colProveedor" text="Proveedor" prefWidth="180"/>
+            <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="180"/>
+        </columns>
+    </TableView>
+</VBox>
