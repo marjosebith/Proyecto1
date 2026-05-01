@@ -8,15 +8,12 @@ public enum ExternalPaymentView {
 
     MAIN("fxml/main-view.fxml"),
     EDIT("fxml/services/editar-servicio.fxml"),
-    BUSCAR_SERVICIO("fxml/services/buscar-servicio.fxml");
+    BUSCAR_SERVICIO("fxml/services/buscar-servicio.fxml"),
+    REGISTRAR_SERVICIO("fxml/services/registrar-servicio.fxml");
 
     private final View view;
 
     ExternalPaymentView(String fileName) {
         this.view = new View(fileName);
-    }
-
-    public View getView() {
-        return view;
     }
 }

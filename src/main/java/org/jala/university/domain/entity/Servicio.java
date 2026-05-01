@@ -1,5 +1,8 @@
 package org.jala.university.domain.entity;
 
+import lombok.Getter;
+
+@Getter
 public final class Servicio {
 
     private String id;
@@ -15,25 +18,5 @@ public final class Servicio {
         this.tipo = tipo;
         this.proveedor = proveedor;
         this.categoria = categoria;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public String getProveedor() {
-        return proveedor;
-    }
-
-    public String getCategoria() {
-        return categoria;
     }
 }
