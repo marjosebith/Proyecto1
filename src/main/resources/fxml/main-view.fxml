@@ -98,9 +98,9 @@
          <VBox spacing="2">
             <VBox.margin><Insets left="12" right="12" bottom="8"/></VBox.margin>
 
-            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12">
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12" onMouseClicked="#goToRegister">
                <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
-               <Label text="Payments" styleClass="nav-label-text"/>
+               <Label text="Registrar Servicio" styleClass="nav-label-text"/>
             </HBox>
 
             <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12" onMouseClicked="#goToEdit">
