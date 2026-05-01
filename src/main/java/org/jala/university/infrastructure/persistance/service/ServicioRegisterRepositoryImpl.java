@@ -10,9 +10,9 @@ import java.util.List;
 public class ServicioRegisterRepositoryImpl {
 
     private static final int PARAM_NOMBRE = 1;
-    private static final int PARAM_TIPO         = 2;
-    private static final int PARAM_PROVEEDOR         = 3;
-    private static final int PARAM_CATEGORIA     = 4;
+    private static final int PARAM_TIPO = 2;
+    private static final int PARAM_PROVEEDOR = 3;
+    private static final int PARAM_CATEGORIA = 4;
 
     private static final String SELECT_SQL =
             "SELECT service_id, service_name, service_type, provider_name, category FROM services WHERE is_active = 1";

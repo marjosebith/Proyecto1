@@ -25,4 +25,11 @@ public class MainViewController extends BaseController {
                 ExternalPaymentView.REGISTRAR_SERVICIO.getView()
         );
     }
+
+    @FXML
+    private void goToVerService() {
+        ViewSwitcher.switchTo(
+                ExternalPaymentView.VER_SERVICIO.getView()
+        );
+    }
 }
