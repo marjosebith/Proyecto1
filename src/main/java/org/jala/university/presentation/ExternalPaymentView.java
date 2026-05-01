@@ -9,7 +9,8 @@ public enum ExternalPaymentView {
     MAIN("fxml/main-view.fxml"),
     EDIT("fxml/services/editar-servicio.fxml"),
     BUSCAR_SERVICIO("fxml/services/buscar-servicio.fxml"),
-    REGISTRAR_SERVICIO("fxml/services/registrar-servicio.fxml");
+    REGISTRAR_SERVICIO("fxml/services/registrar-servicio.fxml"),
+    VER_SERVICIO("fxml/services/ver-servicio.fxml");
 
     private final View view;
 
