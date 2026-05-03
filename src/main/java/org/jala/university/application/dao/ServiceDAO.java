@@ -99,4 +99,41 @@ public final class ServiceDAO {
         }
         return 0;
     }
+
+    public boolean eliminarServicio(Long serviceId) {
+        String sql = "DELETE FROM services WHERE service_id = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, serviceId);
+            int filas = pstmt.executeUpdate();
+
+            return filas > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error eliminando servicio: " + e.getMessage());
+            return false;
+        }
+    }
+
+     //Verificar si servicio existe y está activo
+
+    public boolean existeServicio(Long id) {
+        String sql = "SELECT 1 FROM services WHERE service_id = ?";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }
+

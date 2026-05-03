@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Setter
 @Getter
-public class Service {
+public final class Service {
     private Long serviceId;
     private String serviceName;
     private String serviceType;
@@ -29,3 +29,4 @@ public class Service {
 
     public Service() { }
 }
+
