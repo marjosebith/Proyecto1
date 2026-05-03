@@ -1,6 +1,5 @@
 package org.jala.university.application.dto;
 
-
 import lombok.Getter;
 import lombok.Setter;
 

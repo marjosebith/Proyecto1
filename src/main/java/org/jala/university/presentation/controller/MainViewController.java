@@ -32,4 +32,11 @@ public class MainViewController extends BaseController {
                 ExternalPaymentView.VER_SERVICIO.getView()
         );
     }
+
+    @FXML
+    private void goToDelete() {
+        ViewSwitcher.switchTo(
+                ExternalPaymentView.ELIMINAR_SERVICIO.getView()
+        );
+    }
 }
