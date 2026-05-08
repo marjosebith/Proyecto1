@@ -1,19 +1,19 @@
 package org.jala.university.application.service;
 
-import org.jala.university.domain.entity.Service;
-import org.jala.university.domain.repository.ServiceRepository;
+import org.jala.university.domain.entity.UserService;
+import org.jala.university.domain.repository.UserServiceRepository;
 
 import java.util.List;
 
-public final class ServiceService {
+public final class UpdateService {
 
-    private final ServiceRepository repository;
+    private final UserServiceRepository repository;
 
-    public ServiceService(ServiceRepository repository) {
+    public UpdateService(UserServiceRepository repository) {
         this.repository = repository;
     }
 
-    public List<Service> getServicesByUser(int userId) {
+    public List<UserService> getServicesByUser(int userId) {
 
         if (userId <= 0) {
             throw new IllegalArgumentException("User ID inválido");
@@ -22,7 +22,7 @@ public final class ServiceService {
         return repository.findByUserId(userId);
     }
 
-    public void update(Service service) {
+    public void update(UserService service) {
 
         if (service.getAlias() == null || service.getAlias().isEmpty()) {
             throw new IllegalArgumentException("Alias requerido");

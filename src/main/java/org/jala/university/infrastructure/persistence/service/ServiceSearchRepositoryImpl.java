@@ -1,13 +1,13 @@
-package org.jala.university.application.dao;
+package org.jala.university.infrastructure.persistence.service;
 
-import org.jala.university.application.model.Service;
+import org.jala.university.domain.entity.Service;
 import org.jala.university.infrastructure.config.ConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ServiceDAO {
+public final class ServiceSearchRepositoryImpl {
     //Lista servicios activos (ordenados por fecha creación DESC)
     public List<Service> obtenerServiciosActivos() {
         List<Service> servicios = new ArrayList<>();

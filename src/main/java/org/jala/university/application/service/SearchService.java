@@ -1,6 +1,7 @@
 package org.jala.university.application.service;
 
-import org.jala.university.domain.entity.Servicio;
+import org.jala.university.domain.entity.ServiceCatalog;
+import org.jala.university.domain.repository.ServiceRepository;
 import org.jala.university.infrastructure.config.ConnectionManager;
 
 import java.sql.Connection;
@@ -9,12 +10,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ExternalPaymentServiceImpl implements ExternalPaymentService {
-
+public class SearchService implements ServiceRepository {
     @Override
-    public List<Servicio> buscarServicios(String texto, String campo) {
+    public final List<ServiceCatalog> buscarServicios(String texto, String campo) {
 
-        List<Servicio> lista = new ArrayList<>();
+        List<ServiceCatalog> lista = new ArrayList<>();
 
         String sql;
 
@@ -74,7 +74,7 @@ public final class ExternalPaymentServiceImpl implements ExternalPaymentService 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                lista.add(new Servicio(
+                lista.add(new ServiceCatalog(
                         rs.getString("service_id"),
                         rs.getString("service_name"),
                         rs.getString("service_type"),

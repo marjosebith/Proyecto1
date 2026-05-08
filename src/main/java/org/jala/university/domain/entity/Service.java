@@ -3,27 +3,31 @@ package org.jala.university.domain.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
+import java.time.LocalDateTime;
+
 @Setter
+@Getter
 public final class Service {
 
-    private Long userServiceId;
-    private Long userId;
     private Long serviceId;
-
-    private String accountNumber;
-    private String alias;
-    private String notes;
-
-    private Integer isActive;
-
-    // datos del catálogo
     private String serviceName;
     private String serviceType;
     private String providerName;
     private String category;
+    private boolean isActive;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public boolean isActive() {
-        return isActive != null && isActive == 1;
+    public Service(String serviceName, String serviceType, String providerName, String category) {
+        this.serviceName = serviceName;
+        this.serviceType = serviceType;
+        this.providerName = providerName;
+        this.category = category;
+        this.isActive = true;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
+
+    public Service() { }
 }
+

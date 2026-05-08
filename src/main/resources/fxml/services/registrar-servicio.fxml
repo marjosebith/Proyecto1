@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.jala.university.presentation.controller.RegistrarServicioController">
+            fx:controller="org.jala.university.presentation.controller.RegisterServiceController">
     <children>
         <VBox spacing="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0"
               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

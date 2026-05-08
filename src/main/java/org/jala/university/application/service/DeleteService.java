@@ -1,17 +1,17 @@
 package org.jala.university.application.service;
 
-import org.jala.university.application.dao.ServiceDAO;
+import org.jala.university.infrastructure.persistence.service.ServiceSearchRepositoryImpl;
 import org.jala.university.application.dto.ServiceDTO;
 import org.jala.university.application.mapper.ServiceMapper;
-import org.jala.university.application.model.Service;
+import org.jala.university.domain.entity.Service;
 
 import java.util.List;
 
-public class ServiceEliminar {
-    private final ServiceDAO serviceDAO;
+public class DeleteService {
+    private final ServiceSearchRepositoryImpl serviceDAO;
 
-    public ServiceEliminar() {
-        this.serviceDAO = new ServiceDAO();
+    public DeleteService() {
+        this.serviceDAO = new ServiceSearchRepositoryImpl();
 
         // Verificar conexión y estructura
         if (!serviceDAO.verificarTablaServices()) {

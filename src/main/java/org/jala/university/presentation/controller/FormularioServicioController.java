@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import lombok.Setter;
-import org.jala.university.application.service.ServiceRegister;
+import org.jala.university.application.service.CreateService;
 import org.jala.university.commons.presentation.BaseController;
 
 import java.util.function.Consumer;
@@ -22,7 +22,7 @@ public class FormularioServicioController extends BaseController {
     @FXML private Label errorProveedor;
     @FXML private Label errorCategoria;
 
-    private final ServiceRegister service = new ServiceRegister();
+    private final CreateService service = new CreateService();
 
     @Setter
     private Consumer<String> onRegistroExitoso;

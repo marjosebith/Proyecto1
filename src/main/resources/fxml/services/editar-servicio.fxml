@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      prefHeight="600" prefWidth="1000" spacing="8" stylesheets="@/styles/editar-servicio.css"
-      fx:controller="org.jala.university.presentation.controller.EditarServicioController">
+      prefHeight="600" prefWidth="1000" spacing="8" stylesheets="@/style/editar-servicio.css"
+      fx:controller="org.jala.university.presentation.controller.EditServiceController">
 
     <Label text="Tus servicios registrados"/>
 

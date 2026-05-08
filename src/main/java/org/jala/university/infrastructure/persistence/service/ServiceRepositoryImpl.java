@@ -1,14 +1,14 @@
-package org.jala.university.infrastructure.persistance.service;
+package org.jala.university.infrastructure.persistence.service;
 
-import org.jala.university.domain.entity.Service;
-import org.jala.university.domain.repository.ServiceRepository;
+import org.jala.university.domain.entity.UserService;
+import org.jala.university.domain.repository.UserServiceRepository;
 import org.jala.university.infrastructure.config.ConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ServiceRepositoryImpl implements ServiceRepository {
+public final class ServiceRepositoryImpl implements UserServiceRepository {
 
     private static final int PARAM_ACCOUNT_NUMBER = 1;
     private static final int PARAM_ALIAS         = 2;
@@ -17,7 +17,7 @@ public final class ServiceRepositoryImpl implements ServiceRepository {
     private static final int PARAM_USER_SERVICE_ID = 5;  // WHERE clause
 
     @Override
-    public List<Service> findByUserId(int userId) {
+    public List<UserService> findByUserId(int userId) {
 
         String sql = """
             SELECT us.user_service_id, us.account_number, us.alias, us.notes,
@@ -28,7 +28,7 @@ public final class ServiceRepositoryImpl implements ServiceRepository {
             WHERE us.user_id = ? AND us.is_active = 1
         """;
 
-        List<Service> list = new ArrayList<>();
+        List<UserService> list = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -38,7 +38,7 @@ public final class ServiceRepositoryImpl implements ServiceRepository {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Service s = new Service();
+                UserService s = new UserService();
 
                 s.setUserServiceId(rs.getLong("user_service_id"));
                 s.setServiceId(rs.getLong("service_id"));
@@ -65,7 +65,7 @@ public final class ServiceRepositoryImpl implements ServiceRepository {
     }
 
     @Override
-    public void updateUserService(Service service) {
+    public void updateUserService(UserService service) {
 
         String sql = """
             UPDATE user_services
