@@ -3,11 +3,11 @@ package org.jala.university.presentation.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import org.jala.university.application.service.ServiceService;
+import org.jala.university.application.service.UpdateService;
 import org.jala.university.commons.presentation.BaseController;
 import org.jala.university.commons.presentation.ViewContext;
-import org.jala.university.domain.entity.Service;
-import org.jala.university.infrastructure.persistance.service.ServiceRepositoryImpl;
+import org.jala.university.domain.entity.UserService;
+import org.jala.university.infrastructure.persistence.service.ServiceRepositoryImpl;
 import org.jala.university.commons.presentation.ViewSwitcher;
 import org.jala.university.presentation.ExternalPaymentView;
 
@@ -20,9 +20,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public final class EditarServicioController extends BaseController {
+public final class EditServiceController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditarServicioController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditServiceController.class);
 
     @FXML private VBox servicesContainer;
 
@@ -31,10 +31,10 @@ public final class EditarServicioController extends BaseController {
     @FXML private TextField notesField;
     @FXML private CheckBox activeCheck;
 
-    private final ServiceService serviceService =
-            new ServiceService(new ServiceRepositoryImpl());
+    private final UpdateService serviceService =
+            new UpdateService(new ServiceRepositoryImpl());
 
-    private Service currentService;
+    private UserService currentService;
 
     @FXML
     private void initialize() {
@@ -44,7 +44,7 @@ public final class EditarServicioController extends BaseController {
     private void loadServices() {
         servicesContainer.getChildren().clear();
 
-        List<Service> services = serviceService.getServicesByUser(1);
+        List<UserService> services = serviceService.getServicesByUser(1);
 
         if (services.isEmpty()) {
             servicesContainer.getChildren().add(
@@ -55,7 +55,7 @@ public final class EditarServicioController extends BaseController {
 
         ToggleGroup group = new ToggleGroup();
 
-        for (Service s : services) {
+        for (UserService s : services) {
             String label = s.getServiceName()
                     + (s.getAlias() != null ? " — " + s.getAlias() : "")
                     + (s.getAccountNumber() != null ? " [" + s.getAccountNumber() + "]" : "");

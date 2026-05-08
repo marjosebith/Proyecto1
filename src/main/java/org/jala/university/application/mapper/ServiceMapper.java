@@ -1,7 +1,7 @@
 package org.jala.university.application.mapper;
 
 import org.jala.university.application.dto.ServiceDTO;
-import org.jala.university.application.model.Service;
+import org.jala.university.domain.entity.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 

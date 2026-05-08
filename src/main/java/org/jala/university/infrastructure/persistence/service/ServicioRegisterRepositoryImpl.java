@@ -1,6 +1,6 @@
-package org.jala.university.infrastructure.persistance.service;
+package org.jala.university.infrastructure.persistence.service;
 
-import org.jala.university.domain.entity.Servicio;
+import org.jala.university.domain.entity.ServiceCatalog;
 import org.jala.university.infrastructure.config.ConnectionManager;
 
 import java.sql.*;
@@ -20,15 +20,15 @@ public class ServicioRegisterRepositoryImpl {
     private static final String INSERT_SQL =
             "INSERT INTO services (service_name, service_type, provider_name, category) VALUES (?, ?, ?, ?)";
 
-    public final List<Servicio> findAll() {
-        List<Servicio> lista = new ArrayList<>();
+    public final List<ServiceCatalog> findAll() {
+        List<ServiceCatalog> lista = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(SELECT_SQL)) {
 
             while (rs.next()) {
-                lista.add(new Servicio(
+                lista.add(new ServiceCatalog(
                         String.valueOf(rs.getInt("service_id")),
                         rs.getString("service_name"),
                         rs.getString("service_type"),
@@ -44,7 +44,7 @@ public class ServicioRegisterRepositoryImpl {
         return lista;
     }
 
-    public final void save(Servicio servicio) {
+    public final void save(ServiceCatalog servicio) {
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
 

@@ -6,23 +6,25 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.*;
-import org.jala.university.application.service.ServiceRegister;
+import org.jala.university.application.service.CreateService;
 import org.jala.university.commons.presentation.BaseController;
-import org.jala.university.domain.entity.Servicio;
+import org.jala.university.domain.entity.ServiceCatalog;
 
-public class RegistrarServicioController extends BaseController {
+import java.net.URL;
 
-    @FXML private TableView<Servicio> tableServicios;
-    @FXML private TableColumn<Servicio, Integer> colId;
-    @FXML private TableColumn<Servicio, String> colNombre;
-    @FXML private TableColumn<Servicio, String> colDescripcion;
-    @FXML private TableColumn<Servicio, String> colFactura;
+public class RegisterServiceController extends BaseController {
+
+    @FXML private TableView<ServiceCatalog> tableServicios;
+    @FXML private TableColumn<ServiceCatalog, Integer> colId;
+    @FXML private TableColumn<ServiceCatalog, String> colNombre;
+    @FXML private TableColumn<ServiceCatalog, String> colDescripcion;
+    @FXML private TableColumn<ServiceCatalog, String> colFactura;
 
     @FXML private Label labelConteo;
     @FXML private Label labelMensaje;
 
-    private final ObservableList<Servicio> servicios = FXCollections.observableArrayList();
-    private final ServiceRegister service = new ServiceRegister();
+    private final ObservableList<ServiceCatalog> servicios = FXCollections.observableArrayList();
+    private final CreateService service = new CreateService();
 
     @FXML
     public final void initialize() {
@@ -38,7 +40,12 @@ public class RegistrarServicioController extends BaseController {
     @FXML
     private void handleRegistrar() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Formulari.fxml"));
+            URL resource = getClass().getResource(
+                    "/fxml/Formulari.fxml"
+            );
+
+            FXMLLoader loader = new FXMLLoader(resource);
+
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -52,7 +59,8 @@ public class RegistrarServicioController extends BaseController {
             stage.showAndWait();
 
         } catch (Exception e) {
-            labelMensaje.setText("Error al abrir formulario");
+            e.printStackTrace();
+            labelMensaje.setText(e.getMessage());
         }
     }
 

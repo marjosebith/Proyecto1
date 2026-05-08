@@ -9,7 +9,7 @@
       prefWidth="800"
       prefHeight="500"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jala.university.presentation.controller.BuscarServicioController">
+      fx:controller="org.jala.university.presentation.controller.SearchServiceController">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>

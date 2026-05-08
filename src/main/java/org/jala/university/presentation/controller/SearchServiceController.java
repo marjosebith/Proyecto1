@@ -4,14 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.beans.property.SimpleStringProperty;
-import org.jala.university.application.service.ExternalPaymentService;
-import org.jala.university.application.service.ExternalPaymentServiceImpl;
+import org.jala.university.application.service.SearchService;
+import org.jala.university.domain.repository.ServiceRepository;
 import org.jala.university.commons.presentation.BaseController;
-import org.jala.university.domain.entity.Servicio;
+import org.jala.university.domain.entity.ServiceCatalog;
 
 import java.util.List;
 
-public final class BuscarServicioController extends BaseController {
+public final class SearchServiceController extends BaseController {
 
     @FXML
     private TextField campoBusqueda;
@@ -20,29 +20,29 @@ public final class BuscarServicioController extends BaseController {
     private ComboBox<String> filtroCampo;
 
     @FXML
-    private TableView<Servicio> tabla;
+    private TableView<ServiceCatalog> tabla;
 
     @FXML
-    private TableColumn<Servicio, String> colId;
+    private TableColumn<ServiceCatalog, String> colId;
 
     @FXML
-    private TableColumn<Servicio, String> colNombre;
+    private TableColumn<ServiceCatalog, String> colNombre;
 
     @FXML
-    private TableColumn<Servicio, String> colTipo;
+    private TableColumn<ServiceCatalog, String> colTipo;
 
     @FXML
-    private TableColumn<Servicio, String> colProveedor;
+    private TableColumn<ServiceCatalog, String> colProveedor;
 
     @FXML
-    private TableColumn<Servicio, String> colCategoria;
+    private TableColumn<ServiceCatalog, String> colCategoria;
 
-    private ExternalPaymentService service;
+    private ServiceRepository service;
 
     @FXML
     public void initialize() {
 
-        service = new ExternalPaymentServiceImpl();
+        service = new SearchService();
 
         filtroCampo.getItems().addAll("Todos", "nombre", "tipo", "proveedor", "categoria");
         filtroCampo.setValue("Todos");
@@ -91,7 +91,7 @@ public final class BuscarServicioController extends BaseController {
 
     private void cargarDatos(String texto, String campo) {
 
-        List<Servicio> lista = service.buscarServicios(texto, campo);
+        List<ServiceCatalog> lista = service.buscarServicios(texto, campo);
         tabla.setItems(FXCollections.observableArrayList(lista));
 
         if (lista.isEmpty()) {
