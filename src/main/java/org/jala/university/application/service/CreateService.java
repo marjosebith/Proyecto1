@@ -12,8 +12,7 @@ public class CreateService {
         return repository.findAll();
     }
 
-    public final void registrarServicio(String nombre, String tipo,
-                                  String proveedor, String categoria) {
+    public final void registrarServicio(String nombre, String tipo, String proveedor, String categoria) {
 
         ServiceCatalog servicio = new ServiceCatalog(null, nombre, tipo, proveedor, categoria);
         repository.save(servicio);

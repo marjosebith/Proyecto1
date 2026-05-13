@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.beans.property.SimpleStringProperty;
 import org.jala.university.application.service.SearchService;
+import org.jala.university.commons.presentation.ViewSwitcher;
 import org.jala.university.domain.repository.ServiceRepository;
 import org.jala.university.commons.presentation.BaseController;
 import org.jala.university.domain.entity.ServiceCatalog;
+import org.jala.university.presentation.ExternalPaymentView;
 
 import java.util.List;
 
@@ -99,5 +101,11 @@ public final class SearchServiceController extends BaseController {
         } else {
             tabla.setPlaceholder(new Label("")); // limpiar mensaje
         }
+    }
+    @FXML
+    private void onVolverClick() {
+        ViewSwitcher.switchTo(
+                ExternalPaymentView.MAIN.getView()
+        );
     }
 }

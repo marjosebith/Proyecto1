@@ -7,13 +7,13 @@ INSERT INTO payment_methods (method_name, method_code, description) VALUES
                                                                         ('Tarjeta de Débito', 'debit_card', 'Pago con tarjeta de débito'),
                                                                         ('Transferencia Bancaria', 'bank_transfer', 'Transferencia desde cuenta bancaria');
 
-INSERT INTO services (service_name, service_type, provider_name, category) VALUES
-                                                                               ('Luz Residencial', 'utilities', 'Empresa Eléctrica Nacional', 'Servicios Básicos'),
-                                                                               ('Agua Potable', 'utilities', 'Servicio de Agua Municipal', 'Servicios Básicos'),
-                                                                               ('Internet Fibra Óptica', 'telecom', 'TeleCom Plus', 'Telecomunicaciones'),
-                                                                               ('Telefonía Móvil', 'telecom', 'MovilNet', 'Telecomunicaciones'),
-                                                                               ('Gas Natural', 'utilities', 'Gas del Estado', 'Servicios Básicos'),
-                                                                               ('TV por Cable', 'entertainment', 'CableVision', 'Entretenimiento');
+INSERT INTO services (service_name, service_type, provider_name, category, description) VALUES
+                                                                               ('Luz Residencial', 'utilities', 'Empresa Eléctrica Nacional', 'Servicios Básicos', 'Pago de energía eléctrica'),
+                                                                               ('Agua Potable', 'utilities', 'Servicio de Agua Municipal', 'Servicios Básicos', 'Servicio de agua para el hogar'),
+                                                                               ('Internet Fibra Óptica', 'telecom', 'TeleCom Plus', 'Telecomunicaciones', 'Internet de alta velocidad'),
+                                                                               ('Telefonía Móvil', 'telecom', 'MovilNet', 'Telecomunicaciones', 'Servicio de telefonía celular'),
+                                                                               ('Gas Natural', 'utilities', 'Gas del Estado', 'Servicios Básicos', 'Suministro de gas domiciliario'),
+                                                                               ('TV por Cable', 'entertainment', 'CableVision', 'Entretenimiento', 'Servicio de televisión por suscripción');
 
 INSERT INTO user_services (user_id, service_id, account_number, alias, notes) VALUES
                                                                                   (1, 1, '1234567890', 'Luz Casa', 'Pago mensual de luz'),
