@@ -122,6 +122,11 @@
                <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
                <Label text="eliminar servicio" styleClass="nav-label-text"/>
             </HBox>
+
+            <HBox styleClass="nav-item" alignment="CENTER_LEFT" spacing="12" onMouseClicked="#irAPago">
+               <VBox.margin><Insets top="1" bottom="1"/></VBox.margin>
+               <Label text="pagar" styleClass="nav-label-text"/>
+            </HBox>
          </VBox>
 
          <Region VBox.vgrow="ALWAYS"/>

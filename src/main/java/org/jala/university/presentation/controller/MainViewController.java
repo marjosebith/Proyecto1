@@ -39,4 +39,14 @@ public class MainViewController extends BaseController {
                 ExternalPaymentView.ELIMINAR_SERVICIO.getView()
         );
     }
+
+    /**
+     * Navigates to the payment view.
+     */
+    @FXML
+    public void irAPago() {
+        ViewSwitcher.switchTo(
+                ExternalPaymentView.PAGO.getView()
+        );
+    }
 }

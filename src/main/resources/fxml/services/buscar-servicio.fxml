@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.layout.Region?>
 <VBox spacing="15"
       prefWidth="800"
       prefHeight="500"
@@ -40,4 +41,14 @@
             <TableColumn fx:id="colCategoria" text="Categoría" prefWidth="180"/>
         </columns>
     </TableView>
+    <!-- 🔹 Espaciador para empujar el botón abajo -->
+    <Region VBox.vgrow="ALWAYS"/>
+
+    <!-- 🔹 Botón abajo a la derecha -->
+    <HBox alignment="BOTTOM_RIGHT">
+        <Button text="Volver"
+                prefWidth="100"
+                prefHeight="35"
+                onAction="#onVolverClick"/>
+    </HBox>
 </VBox>
