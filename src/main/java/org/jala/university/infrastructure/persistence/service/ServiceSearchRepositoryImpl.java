@@ -13,8 +13,7 @@ public final class ServiceSearchRepositoryImpl {
         List<Service> servicios = new ArrayList<>();
         String sql = """
                 SELECT service_id, service_name, service_type, provider_name, category,
-                created_at, updated_at, is_active FROM services
-                WHERE is_active = 1
+                created_at, updated_at FROM services
                 ORDER BY created_at DESC
                 """;
         try (Connection conn = ConnectionManager.getConnection();
@@ -36,9 +35,9 @@ public final class ServiceSearchRepositoryImpl {
     public Service obtenerServicioPorId(Long serviceId) {
         String sql = """
                 SELECT service_id, service_name, service_type, provider_name, category,
-                created_at, updated_at, is_active
+                created_at, updated_at
                 FROM services
-                WHERE service_id = ? AND is_active = 1
+                WHERE service_id = ?
                 """;
 
         try (Connection conn = ConnectionManager.getConnection();
@@ -63,7 +62,6 @@ public final class ServiceSearchRepositoryImpl {
         service.setServiceType(rs.getString("service_type"));
         service.setProviderName(rs.getString("provider_name"));
         service.setCategory(rs.getString("category"));
-        service.setActive(rs.getBoolean("is_active"));
         service.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
         service.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
         return service;
@@ -85,7 +83,7 @@ public final class ServiceSearchRepositoryImpl {
 
     //Conteo de servicios activos
     public int contarServiciosActivos() {
-        String sql = "SELECT COUNT(*) FROM services WHERE is_active = 1";
+        String sql = "SELECT COUNT(*) FROM services";
 
         try (Connection conn = ConnectionManager.getConnection();
              Statement stmt = conn.createStatement();
@@ -117,7 +115,7 @@ public final class ServiceSearchRepositoryImpl {
         }
     }
 
-     //Verificar si servicio existe y está activo
+     //Verificar si servicio existe
 
     public boolean existeServicio(Long id) {
         String sql = "SELECT 1 FROM services WHERE service_id = ?";

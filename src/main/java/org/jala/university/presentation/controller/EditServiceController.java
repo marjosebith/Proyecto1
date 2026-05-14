@@ -29,7 +29,7 @@ public final class EditServiceController extends BaseController {
     @FXML private TextField aliasField;
     @FXML private TextField accountField;
     @FXML private TextField notesField;
-    @FXML private CheckBox activeCheck;
+
 
     private final UpdateService serviceService =
             new UpdateService(new ServiceRepositoryImpl());
@@ -70,7 +70,6 @@ public final class EditServiceController extends BaseController {
                     aliasField.setText(s.getAlias() != null ? s.getAlias() : "");
                     accountField.setText(s.getAccountNumber() != null ? s.getAccountNumber() : "");
                     notesField.setText(s.getNotes() != null ? s.getNotes() : "");
-                    activeCheck.setSelected(s.isActive());
                 } else {
                     currentService = null;
                     clearForm();
@@ -85,7 +84,6 @@ public final class EditServiceController extends BaseController {
         aliasField.clear();
         accountField.clear();
         notesField.clear();
-        activeCheck.setSelected(false);
     }
 
     @FXML
@@ -119,7 +117,6 @@ public final class EditServiceController extends BaseController {
                 currentService.setAlias(aliasField.getText());
                 currentService.setAccountNumber(accountField.getText());
                 currentService.setNotes(notesField.getText());
-                currentService.setIsActive(activeCheck.isSelected() ? 1 : 0);
 
                 try {
                     serviceService.update(currentService);

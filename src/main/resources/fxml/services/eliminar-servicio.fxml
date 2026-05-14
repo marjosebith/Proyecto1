@@ -11,14 +11,29 @@
 
     <TableView fx:id="servicesTable">
         <columns>
-            <TableColumn fx:id="nameColumn" text="Nombre" prefWidth="250"/>
-            <TableColumn fx:id="typeColumn" text="Tipo" prefWidth="100"/>
-            <TableColumn fx:id="providerColumn" text="Proveedor" prefWidth="200"/>
+
+            <TableColumn fx:id="idColumn"
+                         text="ID"
+                         prefWidth="80"/>
+
+            <TableColumn fx:id="nameColumn"
+                         text="Nombre"
+                         prefWidth="250"/>
+
+            <TableColumn fx:id="typeColumn"
+                         text="Tipo"
+                         prefWidth="100"/>
+
+            <TableColumn fx:id="providerColumn"
+                         text="Proveedor"
+                         prefWidth="200"/>
         </columns>
     </TableView>
 
     <HBox spacing="10">
         <Button fx:id="refreshButton" text="Recargar"/>
+        <Button text="Cancelar"  onAction="#goBack"
+                    style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-min-width: 120;"/>
         <Button fx:id="deleteButton" text="Eliminar"/>
     </HBox>
 

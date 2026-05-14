@@ -53,11 +53,12 @@ public class FormularioServicioController extends BaseController {
             if (onRegistroExitoso != null) {
                 onRegistroExitoso.accept(fieldNombre.getText().trim());
             }
-
             cerrarVentana();
 
+        } catch (IllegalArgumentException e) {
+            errorNombre.setText(e.getMessage());
         } catch (Exception e) {
-            errorNombre.setText("Error: " + e.getMessage());
+            errorNombre.setText("Error inesperado: " + e.getMessage());
         }
     }
 

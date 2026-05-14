@@ -16,7 +16,6 @@ public final class Service {
     private String serviceType;
     private String providerName;
     private String category;
-    private boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -25,7 +24,6 @@ public final class Service {
         this.serviceType = serviceType;
         this.providerName = providerName;
         this.category = category;
-        this.isActive = true;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }

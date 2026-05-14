@@ -1,10 +1,12 @@
 package org.jala.university.domain.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public final class UserService {
 
     private Long userServiceId;
@@ -15,8 +17,7 @@ public final class UserService {
     private String alias;
     private String notes;
 
-    private Integer isActive;
-
+    // datos del catálogo
     private String serviceName;
     private String serviceType;
     private String providerName;
@@ -30,14 +31,10 @@ public final class UserService {
         this.notes = notes;
     }
 
-    public UserService() { }
-
-    public boolean isActive() {
-        return isActive != null && isActive == 1;
-    }
-
     @Override
     public String toString() {
-        return alias != null && !alias.isBlank() ? alias : serviceName;
+        return (alias != null && !alias.isBlank())
+                ? String.format("%s - %s", alias, serviceName)
+                : serviceName;
     }
 }

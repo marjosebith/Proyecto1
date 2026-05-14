@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicioRegisterRepositoryImpl {
+public final class ServicioRegisterRepositoryImpl {
 
     private static final int PARAM_NOMBRE = 1;
     private static final int PARAM_TIPO = 2;
@@ -15,12 +15,12 @@ public class ServicioRegisterRepositoryImpl {
     private static final int PARAM_CATEGORIA = 4;
 
     private static final String SELECT_SQL =
-            "SELECT service_id, service_name, service_type, provider_name, category FROM services WHERE is_active = 1";
+            "SELECT service_id, service_name, service_type, provider_name, category FROM services";
 
     private static final String INSERT_SQL =
             "INSERT INTO services (service_name, service_type, provider_name, category) VALUES (?, ?, ?, ?)";
 
-    public final List<ServiceCatalog> findAll() {
+    public List<ServiceCatalog> findAll() {
         List<ServiceCatalog> lista = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection();
@@ -44,7 +44,7 @@ public class ServicioRegisterRepositoryImpl {
         return lista;
     }
 
-    public final void save(ServiceCatalog servicio) {
+    public void save(ServiceCatalog servicio) {
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT_SQL)) {
 
@@ -58,5 +58,26 @@ public class ServicioRegisterRepositoryImpl {
         } catch (SQLException e) {
             throw new RuntimeException("Error al guardar servicio", e);
         }
+    }
+
+    public boolean existeServicio(String nombre, String proveedor) {
+        String sql = "SELECT COUNT(*) FROM services WHERE LOWER(service_name) = LOWER(?) "
+                + "AND LOWER(provider_name) = LOWER(?)";
+
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, nombre.trim());
+            stmt.setString(2, proveedor.trim());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al verificar existencia del servicio", e);
+        }
+        return false;
     }
 }
