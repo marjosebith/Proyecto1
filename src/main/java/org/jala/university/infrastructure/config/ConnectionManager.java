@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public final class ConnectionManager {
-    private static final String URL = "jdbc:sqlite:db.sqlite3pru.db";
+    private static final String URL = "jdbc:sqlite:db.sqlite3";
 
     private ConnectionManager() {
         throw new UnsupportedOperationException("Utility class");

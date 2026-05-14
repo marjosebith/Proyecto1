@@ -9,4 +9,9 @@ public interface UserServiceRepository {
     List<UserService> findByUserId(int userId);
 
     void updateUserService(UserService service);
+
+    void deleteUserService(
+            Long userServiceId,
+            Long userId
+    );
 }

@@ -289,9 +289,6 @@
                            <Button text="Pay bill" styleClass="quick-btn-accent"
                                    GridPane.columnIndex="0" GridPane.rowIndex="1"
                                    maxWidth="Infinity" onAction="#goToEdit"/>
-                           <Button text="History" styleClass="quick-btn"
-                                   GridPane.columnIndex="1" GridPane.rowIndex="1"
-                                   maxWidth="Infinity"/>
                         </GridPane>
                      </VBox>
 

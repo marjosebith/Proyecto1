@@ -14,6 +14,15 @@ public class CreateService {
 
     public final void registrarServicio(String nombre, String tipo, String proveedor, String categoria) {
 
+        if (repository.existeServicio(nombre, proveedor)) {
+            throw new IllegalArgumentException("El servicio '"
+                    + nombre
+                    + "' con el proveedor '"
+                    + proveedor
+                    + "' ya está registrado en el sistema.");
+        }
+
+        //Si no existe, procedemos al registro
         ServiceCatalog servicio = new ServiceCatalog(null, nombre, tipo, proveedor, categoria);
         repository.save(servicio);
     }

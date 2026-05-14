@@ -11,21 +11,20 @@ import java.util.List;
 public final class ServiceRepositoryImpl implements UserServiceRepository {
 
     private static final int PARAM_ACCOUNT_NUMBER = 1;
-    private static final int PARAM_ALIAS         = 2;
-    private static final int PARAM_NOTES         = 3;
-    private static final int PARAM_IS_ACTIVE     = 4;
-    private static final int PARAM_USER_SERVICE_ID = 5;  // WHERE clause
+    private static final int PARAM_ALIAS          = 2;
+    private static final int PARAM_NOTES          = 3;
+    private static final int PARAM_USER_SERVICE_ID = 4;
 
     @Override
     public List<UserService> findByUserId(int userId) {
 
         String sql = """
             SELECT us.user_service_id, us.account_number, us.alias, us.notes,
-                   us.is_active, s.service_id, s.service_name,
+                s.service_id, s.service_name,
                    s.service_type, s.provider_name, s.category
             FROM user_services us
             JOIN services s ON us.service_id = s.service_id
-            WHERE us.user_id = ? AND us.is_active = 1
+            WHERE us.user_id = ?
         """;
 
         List<UserService> list = new ArrayList<>();
@@ -40,14 +39,16 @@ public final class ServiceRepositoryImpl implements UserServiceRepository {
             while (rs.next()) {
                 UserService s = new UserService();
 
-                s.setUserServiceId(rs.getLong("user_service_id"));
+
+                s.setUserServiceId(
+                        rs.getLong("user_service_id")
+                );
+                s.setUserId((long) userId);
                 s.setServiceId(rs.getLong("service_id"));
 
                 s.setAccountNumber(rs.getString("account_number"));
                 s.setAlias(rs.getString("alias"));
                 s.setNotes(rs.getString("notes"));
-
-                s.setIsActive(rs.getInt("is_active"));
 
                 s.setServiceName(rs.getString("service_name"));
                 s.setServiceType(rs.getString("service_type"));
@@ -69,7 +70,7 @@ public final class ServiceRepositoryImpl implements UserServiceRepository {
 
         String sql = """
             UPDATE user_services
-            SET account_number = ?, alias = ?, notes = ?, is_active = ?
+            SET account_number = ?, alias = ?, notes = ?
             WHERE user_service_id = ?
         """;
 
@@ -79,13 +80,50 @@ public final class ServiceRepositoryImpl implements UserServiceRepository {
             stmt.setString(PARAM_ACCOUNT_NUMBER,   service.getAccountNumber());
             stmt.setString(PARAM_ALIAS,            service.getAlias());
             stmt.setString(PARAM_NOTES,            service.getNotes());
-            stmt.setInt(PARAM_IS_ACTIVE,           service.isActive() ? 1 : 0);
-            stmt.setLong(PARAM_USER_SERVICE_ID,    service.getUserServiceId()); // ← usaba serviceId antes
+            stmt.setLong(PARAM_USER_SERVICE_ID,    service.getUserServiceId());
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error al actualizar en la base de datos", e);
+        }
+    }
+
+
+    @Override
+    public void deleteUserService(
+            Long userServiceId,
+            Long userId
+    ) {
+
+        String sql = """
+        DELETE FROM user_services
+        WHERE user_service_id = ?
+        AND user_id = ?
+    """;
+
+        try (
+                Connection conn = ConnectionManager.getConnection();
+                PreparedStatement stmt =
+                        conn.prepareStatement(sql)
+        ) {
+
+            stmt.setLong(1, userServiceId);
+            stmt.setLong(2, userId);
+
+            int rows = stmt.executeUpdate();
+
+            if (rows == 0) {
+                throw new RuntimeException(
+                        "No se encontró el servicio del usuario"
+                );
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(
+                    "Error eliminando servicio",
+                    e
+            );
         }
     }
 }

@@ -8,7 +8,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.*;
 import org.jala.university.application.service.CreateService;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.commons.presentation.ViewSwitcher;
 import org.jala.university.domain.entity.ServiceCatalog;
+import org.jala.university.presentation.ExternalPaymentView;
 
 import java.net.URL;
 
@@ -18,7 +20,7 @@ public class RegisterServiceController extends BaseController {
     @FXML private TableColumn<ServiceCatalog, Integer> colId;
     @FXML private TableColumn<ServiceCatalog, String> colNombre;
     @FXML private TableColumn<ServiceCatalog, String> colDescripcion;
-    @FXML private TableColumn<ServiceCatalog, String> colFactura;
+    @FXML private TableColumn<ServiceCatalog, String> colProveedor;
 
     @FXML private Label labelConteo;
     @FXML private Label labelMensaje;
@@ -31,7 +33,7 @@ public class RegisterServiceController extends BaseController {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        colFactura.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
+        colProveedor.setCellValueFactory(new PropertyValueFactory<>("proveedor"));
 
         tableServicios.setItems(servicios);
         cargarServicios();
@@ -72,5 +74,9 @@ public class RegisterServiceController extends BaseController {
 
     private void mostrarExito(String nombre) {
         labelMensaje.setText("Servicio " + nombre + " registrado");
+    }
+
+    @FXML private void goBack() {
+        ViewSwitcher.switchTo(ExternalPaymentView.MAIN.getView());
     }
 }

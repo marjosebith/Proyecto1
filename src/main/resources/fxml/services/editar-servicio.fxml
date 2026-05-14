@@ -1,30 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      prefHeight="600" prefWidth="1000" spacing="8" stylesheets="@/style/editar-servicio.css"
+      prefHeight="600" prefWidth="800" spacing="12"
       fx:controller="org.jala.university.presentation.controller.EditServiceController">
 
-    <Label text="Tus servicios registrados"/>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
-    <!-- Los ToggleButtons se inyectan aquí dinámicamente -->
-    <VBox fx:id="servicesContainer" spacing="4"/>
+    <Label text="Gestión de Mis Servicios" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
-    <Label text="Alias"/>
-    <TextField fx:id="aliasField"/>
+    <Label text="Selecciona el servicio que deseas modificar:"/>
 
-    <Label text="Número de cuenta"/>
-    <TextField fx:id="accountField"/>
 
-    <Label text="Notas"/>
-    <TextField fx:id="notesField"/>
+    <ScrollPane prefHeight="200" fitToWidth="true">
+        <VBox fx:id="servicesContainer" spacing="5">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="5"/>
+            </padding>
+        </VBox>
+    </ScrollPane>
 
-    <CheckBox fx:id="activeCheck" text="Activo"/>
+    <Separator/>
 
-    <HBox spacing="8">
-        <Button text="Guardar" onAction="#handleUpdate"/>
-        <Button text="Volver"  onAction="#goBack"/>
+    <GridPane vgap="10" hgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120" prefWidth="120" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+
+        <Label text="Alias Personal:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="aliasField" promptText="Ej: Luz de mi casa" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Número de Cuenta:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="accountField" promptText="Número de contrato" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Notas Adicionales:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="notesField" promptText="Ej: Pagar antes del día 10" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Cancelar"  onAction="#goBack" style="-fx-min-width: 100;"/>
+        <Button text="Guardar Cambios" onAction="#handleUpdate"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-min-width: 120;"/>
     </HBox>
 </VBox>
