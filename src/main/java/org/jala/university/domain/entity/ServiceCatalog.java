@@ -19,4 +19,9 @@ public final class ServiceCatalog {
         this.proveedor = proveedor;
         this.categoria = categoria;
     }
+    @Override
+    public String toString() {
+
+        return proveedor + " - " + nombre;
+    }
 }
