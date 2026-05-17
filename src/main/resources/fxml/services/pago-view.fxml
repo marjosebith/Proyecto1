@@ -1,28 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <VBox spacing="15"
-      prefWidth="800"
-      prefHeight="500"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jala.university.presentation.controller.PagoController">
+      fx:controller="org.jala.university.presentation.controller.ServicePaymentDetailsController"
+      prefWidth="900"
+      prefHeight="600">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <HBox spacing="10" alignment="CENTER_LEFT">
-        <ComboBox fx:id="comboServicios"
-                  promptText="Seleccione un servicio"
-                  prefWidth="400"
-                  prefHeight="35"/>
+    <!-- Selección servicio -->
+    <HBox spacing="10">
+
+        <ComboBox fx:id="cmbServicios"
+                  prefWidth="500"/>
+
+        <Button text="Limpiar"
+                onAction="#limpiarFormulario"/>
+
     </HBox>
 
+    <!-- Datos servicio -->
+    <GridPane hgap="15" vgap="15">
+
+        <Label text="Servicio:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="lblServicio"
+               GridPane.rowIndex="0"
+               GridPane.columnIndex="1"/>
+
+        <Label text="Tipo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label fx:id="lblTipo"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="1"/>
+
+        <Label text="Proveedor:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Label fx:id="lblProveedor"
+               GridPane.rowIndex="2"
+               GridPane.columnIndex="1"/>
+
+    </GridPane>
+
+    <Separator/>
+
+    <!-- Buscar contrato -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+
+        <Label text="Número contrato:"/>
+
+        <TextField fx:id="txtContrato"
+                   promptText="Ingrese contrato"
+                   prefWidth="250"/>
+
+        <Button text="Buscar"
+                onAction="#buscarDetallePago"/>
+
+    </HBox>
+
+    <Separator/>
+
+    <!-- Resultado pago -->
+    <GridPane hgap="15" vgap="15">
+
+        <!-- Contrato -->
+        <Label text="Contrato:"
+               GridPane.rowIndex="0"
+               GridPane.columnIndex="0"/>
+
+        <Label fx:id="lblContrato"
+               GridPane.rowIndex="0"
+               GridPane.columnIndex="1"/>
+
+        <!-- Usuario -->
+        <Label text="Usuario:"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="0"/>
+
+        <Label fx:id="lblUsuario"
+               GridPane.rowIndex="1"
+               GridPane.columnIndex="1"/>
+
+        <!-- Monto -->
+        <Label text="Monto:"
+               GridPane.rowIndex="2"
+               GridPane.columnIndex="0"/>
+
+        <Label fx:id="lblMonto"
+               style="-fx-text-fill: green; -fx-font-weight: bold;"
+               GridPane.rowIndex="2"
+               GridPane.columnIndex="1"/>
+
+        <!-- Estado -->
+        <Label text="Estado:"
+               GridPane.rowIndex="3"
+               GridPane.columnIndex="0"/>
+
+        <Label fx:id="lblEstado"
+               GridPane.rowIndex="3"
+               GridPane.columnIndex="1"/>
+
+        <!-- Fecha -->
+        <Label text="Fecha vencimiento:"
+               GridPane.rowIndex="4"
+               GridPane.columnIndex="0"/>
+
+        <Label fx:id="lblFecha"
+               GridPane.rowIndex="4"
+               GridPane.columnIndex="1"/>
+
+    </GridPane>
     <!-- 🔹 Espaciador para empujar el botón abajo -->
     <Region VBox.vgrow="ALWAYS"/>
 
@@ -33,5 +123,4 @@
                 prefHeight="35"
                 onAction="#onVolverClick"/>
     </HBox>
-
 </VBox>
